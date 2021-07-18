@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Container } from '@material-ui/core'
+import React, { ReactNode } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { AppointmentApiUsingMock } from './apis/appointment-using-mock.api'
+import './App.css'
+import CreateAppointment from './components/create-appointment.component'
+import ViewAppointments from './components/view-appointments.component'
+import ViewAppointment from './components/view-appointment.component'
+import EditAppointment from './components/edit-appointment.component'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+type State = {}
+
+type Props = {}
+
+export default class App extends React.Component<Props, State> {
+	private appointmentsApi = new AppointmentApiUsingMock()
+
+	render(): ReactNode {
+		return (
+			<Container maxWidth="md">
+				<Router>
+					<Switch>
+						<Route exact path="/view-appointments">
+							<ViewAppointments appointmentApi={this.appointmentsApi} />
+						</Route>
+						<Route exact path="/create-appointment">
+							<CreateAppointment appointmentApi={this.appointmentsApi} />
+						</Route>
+						<Route exact path="/view-appointment/:appointmentId">
+							<ViewAppointment appointmentApi={this.appointmentsApi} />
+						</Route>
+						<Route exact path="/edit-appointment/:appointmentId">
+							<EditAppointment appointmentApi={this.appointmentsApi} />
+						</Route>
+					</Switch>
+				</Router>
+			</Container>
+		)
+	}
 }
-
-export default App;
