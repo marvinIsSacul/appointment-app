@@ -3,6 +3,9 @@ export type Appointment = {
 	description: string
 	time: string
 	date: string
+
+	updatedAt: string
+	createdAt: string
 }
 
 export class Exception extends Error {
@@ -33,4 +36,41 @@ export class Exception extends Error {
 		}
 		return stacktrace.join('\n')
 	}
+}
+
+export type GetAppointmentsResponse = {
+	offset: number
+	limit: number
+	data: Array<Appointment>
+}
+export type GetAppointmentsErrorResponse = {
+	message: string
+}
+
+export type GetAppointmentResponse = {
+	data: Appointment
+}
+export type GetAppointmentErrorResponse = {
+	message: string
+}
+
+export type DeleteAppointmentResponse = {
+	data: Appointment
+}
+export type DeleteAppointmentErrorResponse = {
+	message: string
+}
+
+export type CreateAppointmentResponse = {
+	data: Appointment
+}
+export type CreateAppointmentErrorResponse = {
+	message: string
+}
+
+export type UpdateAppointmentResponse = {
+	data: Partial<Partial<Pick<Appointment, 'id'>>>
+}
+export type UpdateAppointmentErrorResponse = {
+	message: string
 }

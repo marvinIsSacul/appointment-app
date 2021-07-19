@@ -3,7 +3,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { Avatar, List, ListItemAvatar, ListItemButton, ListItemText } from '@material-ui/core'
 import ImageIcon from '@material-ui/icons/Image'
 import { AppointmentApi } from '../apis/appointment.api'
-import { Appointment } from '../types'
+import { Appointment } from '../../common/types'
 
 type State = {
 	appointments: Array<Appointment>

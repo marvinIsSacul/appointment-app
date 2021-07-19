@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
-import { Appointment } from '../types'
+import { Appointment } from '../../common/types'
 import {
 	AppointmentApi,
 	CreateAppointmentRequest,
@@ -36,6 +36,8 @@ export class AppointmentApiUsingMock implements AppointmentApi {
 		return {
 			date: '2019-12-1',
 			description: 'New Description.',
+			createdAt: '2021-07-19T22:49:55.840Z',
+			updatedAt: '2021-07-19T22:49:55.840Z',
 			id: uuidv4(),
 			time: '12:00',
 		}
@@ -51,11 +53,15 @@ export class AppointmentApiUsingMock implements AppointmentApi {
 				date: '2021-11-2',
 				description: 'Hello',
 				id: uuidv4(),
+				createdAt: '2021-07-19T22:49:55.840Z',
+				updatedAt: '2021-07-19T22:49:55.840Z',
 				time: '08:43',
 			},
 			{
 				date: '2019-12-1',
 				description: 'World',
+				createdAt: '2021-07-19T22:49:55.840Z',
+				updatedAt: '2021-07-19T22:49:55.840Z',
 				id: uuidv4(),
 				time: '11:01',
 			},
@@ -70,6 +76,8 @@ export class AppointmentApiUsingMock implements AppointmentApi {
 		return {
 			date: '2019-12-1',
 			description: 'Hello',
+			createdAt: '2021-07-19T22:49:55.840Z',
+			updatedAt: '2021-07-19T22:49:55.840Z',
 			id: uuidv4(),
 			time: '12:43',
 		}

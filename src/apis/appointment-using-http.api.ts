@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid'
 import { StatusCodes } from 'http-status-codes'
-import { Appointment } from '../types'
+import { Appointment, UpdateAppointmentErrorResponse } from '../../common/types'
 import {
 	AppointmentApi,
 	CreateAppointmentRequest,
@@ -26,7 +26,10 @@ export class AppointmentApiUsingHttp implements AppointmentApi {
 
 	async updateAppointment(request: UpdateAppointmentRequest): Promise<UpdateAppointmentResponse> {
 		try {
-			const response = await axios.put<void>(this.buildUrl('/' + request.id), request)
+			const response = await axios.put<UpdateAppointmentErrorResponse | UpdateAppointmentResponse>(
+				this.buildUrl('/' + request.id),
+				request,
+			)
 
 			if (response.status === StatusCodes.OK) {
 				return {

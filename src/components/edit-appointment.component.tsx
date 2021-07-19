@@ -3,7 +3,7 @@ import { Button, TextField } from '@material-ui/core'
 import Stack from '@material-ui/core/Stack'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { AppointmentApi } from '../apis/appointment.api'
-import { Appointment } from '../types'
+import { Appointment } from '../../common/types'
 
 type State = {
 	details: string
