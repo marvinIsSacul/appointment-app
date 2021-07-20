@@ -3,7 +3,7 @@ import { Button, TextField } from '@material-ui/core'
 import Stack from '@material-ui/core/Stack'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { AppointmentApi } from '../apis/appointment.api'
-import { Appointment } from '../../common/types'
+import { Appointment } from '../common/types'
 
 type State = {
 	details: string
@@ -38,10 +38,6 @@ class EditAppointment extends React.Component<Props, State> {
 		}
 	}
 
-	private readonly descriptionRef = React.createRef<HTMLInputElement>()
-	private readonly timeRef = React.createRef<HTMLInputElement>()
-	private readonly dateRef = React.createRef<HTMLInputElement>()
-
 	render(): ReactNode {
 		const { details, time, date, hasTriedSubmittingForm, isSubmitting, loadedAppointment } = this.state
 
@@ -54,7 +50,7 @@ class EditAppointment extends React.Component<Props, State> {
 				<Stack spacing={3}>
 					<h2>&nbsp;Edit Appointment</h2>
 					<TextField
-						ref={this.descriptionRef}
+						value={details}
 						required
 						error={hasTriedSubmittingForm && details.length === 0}
 						helperText={hasTriedSubmittingForm && details.length === 0 ? 'Appointment description.' : ''}
@@ -67,7 +63,7 @@ class EditAppointment extends React.Component<Props, State> {
 						disabled={isSubmitting}
 					/>
 					<TextField
-						ref={this.timeRef}
+						value={time}
 						type="time"
 						error={hasTriedSubmittingForm && time.length === 0}
 						helperText={hasTriedSubmittingForm && time.length === 0 ? 'Appointment time.' : ''}
@@ -83,7 +79,7 @@ class EditAppointment extends React.Component<Props, State> {
 						disabled={isSubmitting}
 					/>
 					<TextField
-						ref={this.dateRef}
+						value={date}
 						type="date"
 						error={hasTriedSubmittingForm && date.length === 0}
 						helperText={hasTriedSubmittingForm && date.length === 0 ? 'Appointment date.' : ''}
@@ -150,19 +146,25 @@ class EditAppointment extends React.Component<Props, State> {
 				description: details,
 				time,
 			})
-			this.setState({
-				loadedAppointment: {
-					...loadedAppointment,
-					...updateAppointment,
+			this.setState(
+				{
+					loadedAppointment: {
+						...loadedAppointment,
+						...updateAppointment,
+					},
 				},
-			})
+				() => {
+					alert('Appointment successfully updated')
+					this.props.history.goBack()
+				},
+			)
 		} catch (err) {
 			console.error(err)
 			this.setState({
 				...this.state,
 				isSubmitting: false,
 			})
-			alert('Error creating a new Appointment')
+			window.alert('Error updating Appointment')
 		}
 	}
 
@@ -175,13 +177,13 @@ class EditAppointment extends React.Component<Props, State> {
 
 			const appointment = await appointmentApi.getAppointmentById({ appointmentId: match.params.appointmentId })
 
-			if (this.dateRef.current && this.descriptionRef.current && this.timeRef.current) {
-				this.dateRef.current.value = appointment.date
-				this.descriptionRef.current.value = appointment.description
-				this.timeRef.current.value = appointment.time
-			}
-
-			this.setState({ loadedAppointment: appointment, isLoadingAppointment: false })
+			this.setState({
+				loadedAppointment: appointment,
+				isLoadingAppointment: false,
+				details: appointment.description,
+				date: appointment.date,
+				time: appointment.time,
+			})
 		} catch (err) {
 			console.error(err)
 			this.setState({ isFailedLoadingAppointment: true, isLoadingAppointment: false })

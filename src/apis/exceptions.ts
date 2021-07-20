@@ -1,4 +1,4 @@
-import { Exception } from '../types'
+import { Exception } from '../common/types'
 
 export class ApiException extends Exception {
 	constructor(message: string, cause?: Exception | Error) {

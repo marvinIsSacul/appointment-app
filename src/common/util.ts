@@ -7,7 +7,7 @@ export type Validator<T> = {
 }
 
 /**
- * Validates and makes sure that object is of type T
+ * Validates and makes sure that object is of type T.
  */
 export function assemble<T>(object: any, validators: Array<Validator<T>>): T {
 	validators.forEach((validator) => {

@@ -1,4 +1,4 @@
-import { Appointment } from '../types'
+import { Appointment } from '../common/types'
 
 export type CreateAppointmentRequest = Pick<Appointment, 'description' | 'date' | 'time'>
 export type DeleteAppointmentRequest = { appointmentId: string }

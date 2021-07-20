@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import { handler as createAppointmentHandler } from './handlers/handler.create-appointment'
 import { handler as getAppointmentsHandler } from './handlers/handler.get-appointments'
 import { handler as getAppointmentHandler } from './handlers/handler.get-appointment-by-id'
@@ -18,6 +19,9 @@ app.listen(port, () => {
 // No longer need to use bodyparser
 app.use(express.json())
 app.use(express.urlencoded())
+
+// Enable CORS.
+app.use(cors())
 
 app.post('/appointments', (req, res) => createAppointmentHandler(req, res))
 app.get('/appointments', (req, res) => getAppointmentsHandler(req, res))

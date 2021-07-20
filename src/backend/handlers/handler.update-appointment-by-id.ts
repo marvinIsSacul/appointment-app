@@ -47,7 +47,7 @@ export async function handler(
 			time: expectedBody.time,
 		})
 
-		response.status(StatusCodes.CREATED).send({
+		response.status(StatusCodes.OK).send({
 			data: appointment,
 		})
 	} catch (err) {

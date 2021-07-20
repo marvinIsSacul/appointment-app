@@ -3,7 +3,7 @@ import { Button, TextField } from '@material-ui/core'
 import Stack from '@material-ui/core/Stack'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { AppointmentApi } from '../apis/appointment.api'
-import { Appointment } from '../../common/types'
+import { Appointment } from '../common/types'
 
 type State = {
 	isDeleting: boolean
@@ -80,6 +80,9 @@ class ViewAppointment extends React.Component<Props, State> {
 						}}
 					/>
 					<Stack spacing={2} direction="row">
+						<Button variant="contained" color="primary" onClick={() => this.props.history.replace('/view-appointments')}>
+							VIEW MY APPOINTMENTS
+						</Button>
 						<Button variant="contained" color="warning" onClick={() => this.onEditAppointment()}>
 							EDIT
 						</Button>
@@ -110,6 +113,7 @@ class ViewAppointment extends React.Component<Props, State> {
 
 		try {
 			await this.props.appointmentApi.deleteAppointment({ appointmentId: appointment.id })
+			window.alert('Appointment successfully deleted.')
 			this.props.history.replace('/view-appointments')
 		} catch (err) {
 			console.error(err)

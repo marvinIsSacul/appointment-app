@@ -3,7 +3,7 @@ import { Button, Dialog, DialogActions, DialogTitle, TextField } from '@material
 import Stack from '@material-ui/core/Stack'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { AppointmentApi } from '../apis/appointment.api'
-import { Appointment } from '../../common/types'
+import { Appointment } from '../common/types'
 
 type State = {
 	details: string
@@ -35,14 +35,16 @@ class CreateAppointment extends React.Component<Props, State> {
 		}
 	}
 
+	private formRef?: HTMLFormElement | null
+
 	render(): ReactNode {
 		const { details, time, date, hasTriedSubmittingForm, isSubmitting } = this.state
 
 		return (
 			<div>
-				<form noValidate>
+				<form noValidate ref={(el) => (this.formRef = el)}>
 					<Stack spacing={3}>
-						<h2>&nbsp;New Appointment</h2>
+						<h2>New Appointment</h2>
 						<TextField
 							required
 							error={hasTriedSubmittingForm && details.length === 0}
@@ -82,9 +84,19 @@ class CreateAppointment extends React.Component<Props, State> {
 							onChange={(event) => this.onDateChange(event)}
 							disabled={isSubmitting}
 						/>
-						<Button variant="contained" color="primary" onClick={() => this.onCreateAppointment()} disabled={isSubmitting}>
-							{isSubmitting ? '...' : 'CREATE'}
-						</Button>
+						<Stack direction="row" spacing={4}>
+							<Button variant="contained" color="primary" onClick={() => this.onCreateAppointment()} disabled={isSubmitting}>
+								{isSubmitting ? '...' : 'CREATE'}
+							</Button>
+							<Button
+								variant="contained"
+								color="error"
+								onClick={() => this.props.history.replace('/view-appointments')}
+								disabled={isSubmitting}
+							>
+								CANCEL
+							</Button>
+						</Stack>
 					</Stack>
 				</form>
 				{this.renderDialog()}
@@ -126,6 +138,7 @@ class CreateAppointment extends React.Component<Props, State> {
 	}
 
 	private clearForm() {
+		this.formRef?.reset()
 		this.setState({
 			date: '',
 			hasTriedSubmittingForm: false,

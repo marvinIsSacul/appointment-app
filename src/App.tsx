@@ -1,19 +1,19 @@
 import { Container } from '@material-ui/core'
 import React, { ReactNode } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { AppointmentApiUsingMock } from './apis/appointment-using-mock.api'
 import './App.css'
 import CreateAppointment from './components/create-appointment.component'
 import ViewAppointments from './components/view-appointments.component'
 import ViewAppointment from './components/view-appointment.component'
 import EditAppointment from './components/edit-appointment.component'
+import { AppointmentApiUsingHttp } from './apis'
 
 type State = {}
 
 type Props = {}
 
 export default class App extends React.Component<Props, State> {
-	private appointmentsApi = new AppointmentApiUsingMock()
+	private appointmentsApi = new AppointmentApiUsingHttp()
 
 	render(): ReactNode {
 		return (
@@ -21,6 +21,9 @@ export default class App extends React.Component<Props, State> {
 				<Router>
 					<Switch>
 						<Route exact path="/view-appointments">
+							<ViewAppointments appointmentApi={this.appointmentsApi} />
+						</Route>
+						<Route exact path="/">
 							<ViewAppointments appointmentApi={this.appointmentsApi} />
 						</Route>
 						<Route exact path="/create-appointment">

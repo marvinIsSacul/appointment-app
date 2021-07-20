@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-import { Avatar, List, ListItemAvatar, ListItemButton, ListItemText } from '@material-ui/core'
+import { Avatar, List, ListItemAvatar, ListItemButton, ListItemText, Stack, Button } from '@material-ui/core'
 import ImageIcon from '@material-ui/icons/Image'
 import { AppointmentApi } from '../apis/appointment.api'
-import { Appointment } from '../../common/types'
+import { Appointment } from '../common/types'
 
 type State = {
 	appointments: Array<Appointment>
@@ -34,7 +34,7 @@ class ViewAppointments extends React.Component<Props, State> {
 						</Avatar>
 					</ListItemAvatar>
 					<ListItemText
-						primary={this.truncateString(appointment.description, 20)}
+						primary={this.truncateString(appointment.description, 50)}
 						secondary={`${appointment.time}, ${appointment.date}`}
 					/>
 				</ListItemButton>
@@ -42,9 +42,15 @@ class ViewAppointments extends React.Component<Props, State> {
 		}
 
 		return (
-			<List sx={{ width: '90%', bgcolor: 'background.paper' }}>
-				{appointments.map((appointment) => renderAppointment(appointment))}
-			</List>
+			<Stack>
+				<h2>My Appointments</h2>
+				<Button variant="contained" color="primary" onClick={() => this.onCreateAppointment()}>
+					CREATE NEW APPOINTMENT
+				</Button>
+				<List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+					{appointments.map((appointment) => renderAppointment(appointment))}
+				</List>
+			</Stack>
 		)
 	}
 
@@ -68,6 +74,10 @@ class ViewAppointments extends React.Component<Props, State> {
 
 	private truncateString(input: string, maxLength = 20): string {
 		return input.length > maxLength ? input.substr(0, maxLength) + '...' : input
+	}
+
+	private onCreateAppointment() {
+		this.props.history.push('create-appointment')
 	}
 }
 
