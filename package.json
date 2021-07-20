@@ -40,9 +40,7 @@
 		"ts-node": "^10.1.0"
 	},
 	"scripts": {
-		"clean": "rm -rf dist",
-		"server-build": "yarn clean && yarn tsc",
-		"server-start": "yarn ts-node src/backend/server.ts",
+		"start-server": "node patch.js && yarn ts-node src/backend/server.ts",
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
