@@ -7,8 +7,8 @@
 - [Getting Started with Create React App](#getting-started-with-create-react-app)
   - [Available Scripts](#available-scripts)
     - [`yarn install`](#yarn-install)
-    - [`yarn start`](#yarn-start)
     - [`yarn start-server`](#yarn-start-server)
+    - [`yarn start`](#yarn-start)
     - [`yarn eject`](#yarn-eject)
 - [API](#api)
   - [HTTP](#http)
@@ -32,14 +32,14 @@ In the project directory, you can run:
 
 Downloads and installs all project dependencies.
 
+### `yarn start-server`
+
+Runs the backend. Default port is `8181`, viz: [http://localhost:8181](http://localhost:8181)
+
 ### `yarn start`
 
 Runs the frontend in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `yarn start-server`
-
-Runs the backend. Default port is `8181`, viz: [http://localhost:8181](http://localhost:8181)
 
 ### `yarn eject`
 
