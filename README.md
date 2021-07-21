@@ -17,6 +17,7 @@
     - [Get Appointments](#get-appointments)
     - [Get Appointment By Id](#get-appointment-by-id)
     - [Delete Appointment By Id](#delete-appointment-by-id)
+- [TODO](#todo)
 
 <!-- /TOC -->
 
@@ -275,3 +276,10 @@ Response
 
 ```json
 ```
+
+# TODO
+
+* Use a very much scalable, concurrent Database System such as MySQL, DynamoDB or MongoDB.
+* Add authentication and add a relationship between Users and Appointments
+* Split the frontend and backend into 2 separate repositories
+* Allow Appointments to be marked as `Done, etc.`. So would need to add more fields to the Appointments structure.
