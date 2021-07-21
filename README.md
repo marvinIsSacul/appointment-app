@@ -84,7 +84,7 @@ Example
 {
     "date": "08-08-1234",
     "time": "11:45",
-    "description": "Fuck this life!"
+    "description": "Orthodontist - Check Up"
 }
 ```
 
@@ -103,7 +103,7 @@ Example
         "createdAt": "2021-07-19T21:32:54.433Z",
         "updatedAt": "2021-07-19T21:32:54.433Z",
         "date": "08-08-1234",
-        "description": "Fuck this life!",
+        "description": "Orthodontist - Check Up",
         "time": "11:45"
     }
 }
@@ -189,7 +189,7 @@ Response
     "data": [
         {
             "id": "87cfe128-5dbf-4ca5-9671-bbe720a800f0",
-            "description": "Fuck this life!",
+            "description": "Orthodontist - Check Up",
             "time": "11:45",
             "date": "08-08-1234",
             "updatedAt": "2021-07-19T21:28:48.046Z",
@@ -197,7 +197,7 @@ Response
         },
         {
             "id": "9f0d63d8-b2a5-40c9-adc3-c2a5f6ae076e",
-            "description": "Fuck this life!",
+            "description": "Interview - Sebenza WIFI",
             "time": "11:45",
             "date": "08-08-1234",
             "updatedAt": "2021-07-19T21:32:54.433Z",
